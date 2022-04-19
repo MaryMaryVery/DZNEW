@@ -1,0 +1,60 @@
+Заполнить таблицы в базе данных с помощью запросов insert.
+Составить 20 запросов select для выборки данных из связанных таблиц.
+
+
+
+
+
+
+
+
+
+ .open database.db
+ .tables 
+
+ create table seller (id_seller integer PRIMARY KEY AUTOINCREMENT, name VARCHAR (50), phone VARCHAR (50));
+
+ INSERT INTO seller (name,phone) VALUES ('Ivan Ivanov','+375382334');
+ INSERT INTO seller (name,phone) VALUES ('Michel May','+352161259');
+ INSERT INTO seller (name,phone) VALUES ('Darya Petrova','+365165165');
+ INSERT INTO seller (name,phone) VALUES ('Dmitry Vasin','+375382334');
+ INSERT INTO seller (name,phone) VALUES ('Max Fray','+37556595');
+
+ create table customer (id_customer integer PRIMARY KEY AUTOINCREMENT, name VARCHAR (50), discount int, phone VARCHAR (50) );
+
+
+INSERT INTO customer (name,discount,phone) VALUES ('John Dorian','5%','+375659595');
+INSERT INTO customer (name,discount,phone) VALUES ('Marta Semenova','10','+26565689');
+INSERT INTO customer (name,discount,phone) VALUES ('Sveta Mankovska','20%','+23565642');
+INSERT INTO customer (name,discount,phone) VALUES ('Lev Tolstoy','15%','+3745245');
+INSERT INTO customer (name,discount,phone) VALUES ('Rita Baseko','10%','+25125855');
+
+ 
+ create table album (id_album integer PRIMARY KEY AUTOINCREMENT, style VARCHAR (50),musician VARCHAR(50), cost int);
+
+INSERT INTO album (style, musician,cost) VALUES ('rock','Queen','40$');
+INSERT INTO album (style, musician,cost) VALUES ('indie','Arctic Monkeys','20$');
+INSERT INTO album (style, musician,cost) VALUES ('trip_hop','Gorillaz','30$');
+INSERT INTO album (style, musician,cost) VALUES ('new wave','The Smiths','35$');
+INSERT INTO album (style, musician,cost) VALUES ('synthpop','Talk Talk','25$');
+   
+PRAGMA foreign_keys=on;
+
+ create table sale  (id_sale integer PRIMARY KEY AUTOINCREMENT, date_sale date, sale_amount int);
+
+
+ INSERT INTO sale (data_sale, sale_amount) VALUES ('05.01.2022','50$');
+INSERT INTO sale (data_sale, sale_amount) VALUES ('22.12.2021','40$');
+ INSERT INTO sale (data_sale, sale_amount) VALUES ('15.12.2021','25$');
+ INSERT INTO sale (data_sale, sale_amount) VALUES ('25.12.2021','30$');
+ INSERT INTO sale (data_sale, sale_amount) VALUES ('19.12.2021','45$');
+.mode box
+ SELECT * from sale;
+  
+select * from album INNER JOIN sale ON album.id_album ;
+
+select * from sale INNER JOIN seller ON seller.id_seller ;
+
+select * from customer INNER JOIN sale on sale.id_sale;
+ 
+ select distinct * from customer INNER JOIN album on album.id_album;
